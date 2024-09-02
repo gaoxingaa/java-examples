@@ -10,4 +10,8 @@ public class MockitoExample {
     public void setHello(Example hello) {
         this.hello = hello;
     }
+
+    public String getName(){
+        return hello.getName();
+    }
 }
