@@ -1,4 +1,4 @@
-#Java Examples for exploray 
+#Java Examples for exploratory 
 
 ##git
 ###how to remove a commit
