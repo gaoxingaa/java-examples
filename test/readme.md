@@ -1,4 +1,4 @@
-#This is the project  where I want to discover how the mockito is working.
+# This is the project  where I want to discover how the mockito is working.
 
 1. setup
 2. create an example
@@ -7,9 +7,9 @@
    1. 
 5. find the flow to create a spy
 
-##Mockito
+## Mockito
 
-###Errors
+### Errors
 ```
 org.mockito.exceptions.base.MockitoException:
 Cannot mock/spy class java.lang.String
@@ -18,7 +18,10 @@ Mockito cannot mock/spy because :
 - 
 ```
 
-###TestNG
+### Flow
+By 
+
+## TestNG
 This command is executed by IntelliJ IDEA when you run a test, likely using TestNG, from the IDE. Here's a breakdown of the parameters:
 
 ```
@@ -36,6 +39,56 @@ com.intellij.rt.testng.RemoteTestNGStarter
 -temp C:\Users\Jane\AppData\Local\Temp\idea_testng.tmp
 
 ```
+This is the main method for this test run
+```
+com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)
+```
+
+By ```@BeforeClass,@BeforeMethod,@AfterMethod,@AfterClass``` annotation, it will call the method in the following order by java reflection in the main method during TestNG test run.
+``````
+===============================================
+setUp
+setUpMethod
+tearDownMethod
+setUpMethod
+tearDownMethod
+tearDown
+===============================================
+``````
+Here is how it works in the stack trace to process the annotations:
 
 ``````
-com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)
+setUp:22, MockitoExampleTest (org.example)
+invoke0:-1, NativeMethodAccessorImpl (jdk.internal.reflect)
+invoke:77, NativeMethodAccessorImpl (jdk.internal.reflect)
+invoke:43, DelegatingMethodAccessorImpl (jdk.internal.reflect)
+invoke:568, Method (java.lang.reflect)
+invokeMethod:141, MethodInvocationHelper (org.testng.internal.invokers)
+invokeMethodConsideringTimeout:71, MethodInvocationHelper (org.testng.internal.invokers)
+invokeConfigurationMethod:400, ConfigInvoker (org.testng.internal.invokers)
+invokeConfigurations:333, ConfigInvoker (org.testng.internal.invokers)
+invokeBeforeClassMethods:188, TestMethodWorker (org.testng.internal.invokers)
+run:128, TestMethodWorker (org.testng.internal.invokers)
+accept:-1, TestRunner$$Lambda$216/0x00000169a40fecf8 (org.testng)
+forEach:1511, ArrayList (java.util)
+privateRun:739, TestRunner (org.testng)
+run:614, TestRunner (org.testng)
+runTest:421, SuiteRunner (org.testng)
+runSequentially:413, SuiteRunner (org.testng)
+privateRun:373, SuiteRunner (org.testng)
+run:312, SuiteRunner (org.testng)
+runSuite:52, SuiteRunnerWorker (org.testng)
+run:95, SuiteRunnerWorker (org.testng)
+runSuitesSequentially:1274, TestNG (org.testng)
+runSuitesLocally:1208, TestNG (org.testng)
+runSuites:1112, TestNG (org.testng)
+run:1079, TestNG (org.testng)
+run:66, IDEARemoteTestNG (com.intellij.rt.testng)
+main:109, RemoteTestNGStarter (com.intellij.rt.testng)
+``````
+
+TestNG use java reflection to invoke configuration and method, here is the code of how it is implemented:
+
+invoke:568, Method (java.lang.reflect)
+
+invokeBeforeClassMethods
