@@ -13,14 +13,14 @@ import static org.testng.Assert.assertEquals;
 
 public class MockitoExampleTest {
     @InjectMocks
-    MockitoExample example = new MockitoExample();
+    MockitoExample example;
 
     @Mock
     private Example hello;
 
     @BeforeMethod
     public void setUp() {
-        MockitoAnnotations.openMocks(example);
+        MockitoAnnotations.openMocks(this);
 
     }
 
