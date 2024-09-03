@@ -92,3 +92,7 @@ TestNG use java reflection to invoke configuration and method, here is the code 
 invoke:568, Method (java.lang.reflect)
 
 invokeBeforeClassMethods
+```
+      IConfigurationAnnotation configuration =
+          AnnotationHelper.findConfiguration(annotationFinder, m);
+```

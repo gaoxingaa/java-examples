@@ -24,4 +24,5 @@ public class ExampleTest {
     @Test
     public void test(){
         assertEquals(example.getName(), hello);
-    }}
+    }
+}
