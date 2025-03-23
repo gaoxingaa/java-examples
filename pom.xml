@@ -18,6 +18,8 @@
         <module>appium</module>
         <module>example</module>
         <module>maven</module>
+        <module>pdf</module>
+        <module>online</module>
     </modules>
 
 </project>
